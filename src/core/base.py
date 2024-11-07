@@ -53,7 +53,7 @@ class CustomDictBase:
         self.__dict__[key] = value
 
     def __getitem__(self, key):
-        return self[key]
+        return self.__dict__[key]
 
     def __repr__(self):
         data = json.dumps({k: v for k, v in self.__dict__.items() if not k.startswith('_')})
@@ -76,5 +76,8 @@ class WebhookPayloadBase(CustomDictBase):
         for key, val in payload.items():
             obj[key] = val
         return obj
+
+    def data(self):
+        return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
 
 

@@ -16,8 +16,8 @@ class WebhookRouter:
             try:
                 payload = WebhookPayload.from_payload(payload)
 
-                processor.process_payload_data(request, payload)
-                processor.dispatch_to_service(request, payload)
+                processed_payload = processor.process_payload_data(request, payload)
+                processor.dispatch_to_service(request, processed_payload)
 
                 return JSONResponse(
                     content={'message': "request processed successfully"},
